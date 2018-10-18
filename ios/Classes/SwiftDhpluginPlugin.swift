@@ -1,7 +1,22 @@
 import Flutter
 import UIKit
 
+public protocol DhPluginListener {
+   public func onDataRequested(data: String, result: @escaping FlutterResult)
+}
+
 public class SwiftDhpluginPlugin: NSObject, FlutterPlugin {
+
+  private static listener: DhPluginListener? = nil
+
+  public func addListener(listener: DhPluginListener) {
+     SwiftDhpluginPlugin.listener = listener
+  }
+
+  public func removeListener() {
+    SwiftDhpluginPlugin.listener = nil
+  }
+
   public static func register(with registrar: FlutterPluginRegistrar) {
     let channel = FlutterMethodChannel(name: "dhplugin", binaryMessenger: registrar.messenger())
     let instance = SwiftDhpluginPlugin()
