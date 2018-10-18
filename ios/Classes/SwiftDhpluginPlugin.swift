@@ -2,12 +2,12 @@ import Flutter
 import UIKit
 
 public protocol DhPluginListener {
-   public func onDataRequested(data: String, result: @escaping FlutterResult)
+  func onDataRequested(data: String, result: @escaping FlutterResult)
 }
 
 public class SwiftDhpluginPlugin: NSObject, FlutterPlugin {
 
-  private static listener: DhPluginListener? = nil
+  private static var listener: DhPluginListener? = nil
 
   public func addListener(listener: DhPluginListener) {
      SwiftDhpluginPlugin.listener = listener
